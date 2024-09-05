@@ -11,9 +11,12 @@
         <h1>Text Decoder</h1>
         <input type="file" id="upload" accept=".csv" />
         <textarea id="encodedText" placeholder="Вставьте закодированный текст сюда..."></textarea>
-        <button id="decodeButton">Декодировать</button>
+        <button id="downloadButton">Скачать как Excel</button>
         <button id="copyButton">Скопировать текст</button>
     </div>
+    <!-- Подключаем библиотеку XLSX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- Подключаем ваш скрипт после библиотеки -->
     <script src="script.js"></script>
 </body>
 </html>

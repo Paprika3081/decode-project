@@ -1,14 +1,25 @@
 document.getElementById('upload').addEventListener('change', handleFile, false);
-document.getElementById('decodeButton').addEventListener('click', function() {
-    const encodedText = document.getElementById('encodedText').value;
-    const decodedText = decodeWindows1251(encodedText);
-    document.getElementById('encodedText').value = decodedText;
-});
 
 document.getElementById('copyButton').addEventListener('click', function() {
     const encodedText = document.getElementById('encodedText');
     encodedText.select();
     document.execCommand('copy');
+});
+
+document.getElementById('downloadButton').addEventListener('click', () => {
+    const textArea = document.getElementById('encodedText');
+    const text = textArea.value;
+
+    // Разделяем текст на строки и создаем массив массивов
+    const rows = text.split('\n').map(line => [line]);
+
+    // Создаем лист Excel из массива массивов
+    const ws = XLSX.utils.aoa_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    
+    // Создаем и скачиваем файл Excel
+    XLSX.writeFile(wb, 'data.xlsx');
 });
 
 function handleFile(event) {
